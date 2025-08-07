@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toktik/config/helpers/human_formats.dart';
 import 'package:toktik/domain/entities/video_post.dart';
 
 
@@ -51,7 +52,7 @@ class _CustomButton extends StatelessWidget {
     return Column(
       children: [
         IconButton(onPressed: (){}, icon: Icon(icon, color: color, size: 40)),
-        Text('$value', style: const TextStyle(color: Colors.white)),
+        Text(HumanFormats.formatNumber(value), style: const TextStyle(color: Colors.white, fontSize: 16))
       ],
     );
   }
