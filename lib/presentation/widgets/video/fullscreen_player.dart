@@ -47,9 +47,56 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
       future:  _controller.initialize(),
       builder: (context, snapshot) {
 
-        return Center(
+        if(snapshot.connectionState != ConnectionState.done) {
+          return Center(
             child: CircularProgressIndicator(strokeWidth: 2,),
-        );
+          );
+        }
+
+        return AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: Stack(
+              children: [
+                VideoPlayer(_controller),
+
+                //Gradient overlay
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Colors.black.withOpacity(0.7),
+                        Colors.transparent,
+                      ],
+                    ),
+                  ),
+                ),
+
+                Positioned(
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  child: Text(
+                    widget.caption,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 10.0,
+                          color: Colors.black.withOpacity(0.5),
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            )
+          );
       } ,
     );
   }
