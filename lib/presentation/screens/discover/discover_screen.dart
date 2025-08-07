@@ -17,10 +17,6 @@ class DiscoverScreen extends StatelessWidget {
    // final anotherExample = Provider.of<DiscoverProvider>(context); // same way to get the changes of the provider.
 
 
-
-
-
-
     return Scaffold(
       body: discoverProvider.initialLoading 
         ? Center(

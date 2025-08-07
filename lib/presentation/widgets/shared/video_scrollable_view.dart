@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toktik/domain/entities/video_post.dart';
 import 'package:toktik/presentation/widgets/shared/video_buttons.dart';
+import 'package:toktik/presentation/widgets/video/fullscreen_player.dart';
 
 
 class VideoScrollableView extends StatelessWidget {
@@ -16,6 +17,11 @@ class VideoScrollableView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+      /**
+       * ! Se usa el PageView.builder, pero el metodo builder es el que permite hacer scroll entre los videos.
+       * 
+       */
+
     return PageView.builder( // Este widget permite hacer scroll horizontal entre los videos a PANTALLA COMPLETA
       scrollDirection: Axis.vertical, //Set scroll in vertical direction
       itemCount: videos.length,
@@ -26,6 +32,11 @@ class VideoScrollableView extends StatelessWidget {
           children: [
             //Video Player + gradiente
 
+            SizedBox.expand(
+              child: FullScreenPlayer(
+              ), // Color de fondo del video
+              //child: VideoPlayerWidget(video: video), // Widget que muestra el video
+            ),
             //Botones
             Positioned(
               bottom: 40,
