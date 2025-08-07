@@ -34,6 +34,8 @@ class VideoScrollableView extends StatelessWidget {
 
             SizedBox.expand(
               child: FullScreenPlayer(
+                videoUrl: video.videoUrl,
+                caption: video.caption,
               ), // Color de fondo del video
               //child: VideoPlayerWidget(video: video), // Widget que muestra el video
             ),
