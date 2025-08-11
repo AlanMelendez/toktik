@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toktik/presentation/widgets/video/video_background.dart';
 import 'package:video_player/video_player.dart';
 
 
@@ -58,6 +59,10 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
               _controller.play()
             }
           },
+          onLongPress: () => {
+            //reset the video to the beginning
+            _controller.seekTo(Duration.zero),
+          },
           child: AspectRatio(
               aspectRatio: _controller.value.aspectRatio,
               child: Stack(
@@ -65,24 +70,13 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
                   VideoPlayer(_controller),
           
                   //Gradient overlay
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //     gradient: LinearGradient(
-                  //       begin: Alignment.bottomCenter,
-                  //       end: Alignment.topCenter,
-                  //       colors: [
-                  //         Colors.black.withOpacity(0.7),
-                  //         Colors.transparent,
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+                  VideoBackground(stops: [0.8,1.0]),
           
                   Positioned(
                     bottom: 50,
                     left: 20,
                     right: 20,
-                    child: _VideoCaption(caption: 'Default Captions',),
+                    child: _VideoCaption(caption: widget.caption,),
                   ),
                 ],
               )
