@@ -50,35 +50,44 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
           );
         }
 
-        return AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: Stack(
-              children: [
-                VideoPlayer(_controller),
-
-                //Gradient overlay
-                // Container(
-                //   decoration: BoxDecoration(
-                //     gradient: LinearGradient(
-                //       begin: Alignment.bottomCenter,
-                //       end: Alignment.topCenter,
-                //       colors: [
-                //         Colors.black.withOpacity(0.7),
-                //         Colors.transparent,
-                //       ],
-                //     ),
-                //   ),
-                // ),
-
-                Positioned(
-                  bottom: 50,
-                  left: 20,
-                  right: 20,
-                  child: _VideoCaption(caption: 'Default Captions',),
-                ),
-              ],
-            )
-          );
+        return GestureDetector(
+          onTap: () => {
+            if(_controller.value.isPlaying) {
+              _controller.pause()
+            } else {
+              _controller.play()
+            }
+          },
+          child: AspectRatio(
+              aspectRatio: _controller.value.aspectRatio,
+              child: Stack(
+                children: [
+                  VideoPlayer(_controller),
+          
+                  //Gradient overlay
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     gradient: LinearGradient(
+                  //       begin: Alignment.bottomCenter,
+                  //       end: Alignment.topCenter,
+                  //       colors: [
+                  //         Colors.black.withOpacity(0.7),
+                  //         Colors.transparent,
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+          
+                  Positioned(
+                    bottom: 50,
+                    left: 20,
+                    right: 20,
+                    child: _VideoCaption(caption: 'Default Captions',),
+                  ),
+                ],
+              )
+            ),
+        );
       } ,
     );
   }
@@ -102,7 +111,7 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
         child: Text(
           caption,
           maxLines: 2,
-          style: titleStyle,                              
+          style: titleStyle,                               
           textAlign: TextAlign.center,
         ),
         
