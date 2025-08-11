@@ -32,9 +32,6 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
   }
 
 
-
-
-
   @override
   void dispose() {
     _controller.dispose();
@@ -60,39 +57,24 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
                 VideoPlayer(_controller),
 
                 //Gradient overlay
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        Colors.black.withOpacity(0.7),
-                        Colors.transparent,
-                      ],
-                    ),
-                  ),
-                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //     gradient: LinearGradient(
+                //       begin: Alignment.bottomCenter,
+                //       end: Alignment.topCenter,
+                //       colors: [
+                //         Colors.black.withOpacity(0.7),
+                //         Colors.transparent,
+                //       ],
+                //     ),
+                //   ),
+                // ),
 
                 Positioned(
-                  bottom: 20,
+                  bottom: 50,
                   left: 20,
                   right: 20,
-                  child: Text(
-                    widget.caption,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 10.0,
-                          color: Colors.black.withOpacity(0.5),
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                  child: _VideoCaption(caption: 'Default Captions',),
                 ),
               ],
             )
@@ -100,5 +82,31 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
       } ,
     );
   }
+
 }
+
+
+  class _VideoCaption extends StatelessWidget {
+
+    final String caption;
+    const _VideoCaption({super.key , required this.caption});
+  
+    @override
+    Widget build(BuildContext context) {
+
+      final size = MediaQuery.of(context).size; //Reference to the screen size
+      final titleStyle = Theme.of(context).textTheme.titleLarge;
+
+      return SizedBox(
+        width: size.width * 0.7, //60% of the screen width
+        child: Text(
+          caption,
+          maxLines: 2,
+          style: titleStyle,                              
+          textAlign: TextAlign.center,
+        ),
+        
+      );
+    }
+  }
  
